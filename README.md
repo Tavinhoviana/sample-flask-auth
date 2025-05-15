@@ -35,14 +35,14 @@ This project was developed with the following technologies:
 
 ## 🔧 Applications
 
-- Registro de novos usuários
+- New user registration
 - Login e logout
-- Proteção de rotas autenticadas
-- Validação de formulários com Flask-WTF
+- Protection of authenticated routes
+- Form validation with Flask-WTF
 
 ## 💻 Project
 
-Projeto de exemplo que demonstra a implementação de autenticação básica utilizando Flask. Este projeto serve como base para aplicações web que necessitam de autenticação de usuários.
+Example project demonstrating the implementation of basic authentication using Flask. This project serves as a foundation for web applications that require user authentication.
 
 ## 🔖 Layout
 
