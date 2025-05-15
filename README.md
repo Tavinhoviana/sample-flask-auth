@@ -20,7 +20,7 @@ Exclusive course, promoted by Rocketseat for teaching web technologies.
 
 <br>
 
-![ContactList]() 
+![ContactList](./assets/Secure%20Future%20of%20Health%20and%20Technology.png) 
 
 ## 🚀 Technologies
 
