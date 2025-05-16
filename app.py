@@ -32,15 +32,15 @@ def login():
         if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
                 login_user(user)
                 print(current_user.is_authenticated)
-                return jsonify({"message": "Autentificacao realizada com sucesso"})
+                return jsonify({"message": "Authentication successful"})
 
-    return jsonify({"message": "Credenciais inválidas"}), 400
+    return jsonify({"message": "Invalid credentials"}), 400
 
 @app.route("/logout", methods=["GET"])
 @login_required
 def logout():
     logout_user()
-    return jsonify({"message": "Logout realizado com sucesso"})
+    return jsonify({"message": "Logout successful"})
 
 @app.route("/user", methods=["POST"])
 def create_user():
@@ -53,9 +53,9 @@ def create_user():
         user = User(username=username, password=hashed_password, role="user")
         db.session.add(user)
         db.session.commit()
-        return jsonify({"message": "Usuario cadastrado com sucesso"}) 
+        return jsonify({"message": "User registered successfully"}) 
 
-    return jsonify({"message": "Dados invalidos"}), 400
+    return jsonify({"message": "Invalid data"}), 400
 
 @app.route("/user/<int:id_user>", methods=["GET"])
 @login_required
@@ -65,7 +65,7 @@ def read_user(id_user):
      if user:
           return {"username": user.username}
      
-     return jsonify({"message": "Usuario nao encontrado"}), 404
+     return jsonify({"message": "User not found"}), 404
 
 @app.route("/user/<int:id_user>", methods=["PUT"])
 @login_required
@@ -74,14 +74,14 @@ def update_user(id_user):
     data = request.json
 
     if id_user != current_user.id and current_user.role == "user":
-         return jsonify({"message": "Operacao nao permitida"}), 403
+         return jsonify({"message": "Operation not permitted"}), 403
     
     if user and data.get("password"):
           user.password = data.get("password")
           db.session.commit()
-          return jsonify({"message": f"Usuario {id_user} atualizado com sucesso"})
+          return jsonify({"message": f"User {id_user} updated successfully"})
      
-    return jsonify({"message": "Usuario nao encontrado"}), 404
+    return jsonify({"message": "User not found"}), 404
 
 @app.route("/user/<int:id_user>", methods=["DELETE"])
 @login_required
@@ -89,17 +89,17 @@ def delete_user(id_user):
     user = User.query.get(id_user)
 
     if current_user.role != "admin":
-        return jsonify ({"message": "Operacao nao permitida"}), 403
+        return jsonify ({"message": "Operation not permitted"}), 403
 
     if id_user == current_user.id:
-          return jsonify({"message": "Deleçao nao permitida"}), 403
+          return jsonify({"message": "Deletion not allowed"}), 403
 
     if user:
         db.session.delete(user)
         db.session.commit()
-        return jsonify({"message": f"Usuario {id_user} deletado com sucesso"})
+        return jsonify({"message": f"User {id_user} Deleted successfully"})
      
-    return jsonify({"message": "Usuario nao encontrado"}), 404
+    return jsonify({"message": "User not found"}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)
